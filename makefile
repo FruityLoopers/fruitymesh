@@ -98,6 +98,12 @@ CPP_SOURCE_FILES += ./src/utility/Storage.cpp
 CPP_SOURCE_FILES += ./src/utility/Terminal.cpp
 CPP_SOURCE_FILES += ./src/utility/Utility.cpp
 
+CPP_SOURCE_FILES += ./src/Wire.cpp
+
+CPP_SOURCE_FILES += ./git_submodules/linux-to-pn532/git_submodules/PN532/PN532_I2C/PN532_I2C.cpp
+CPP_SOURCE_FILES += ./git_submodules/linux-to-pn532/git_submodules/PN532/PN532/PN532.cpp
+CPP_SOURCE_FILES += ./git_submodules/linux-to-pn532/git_submodules/PN532/NDEF/NfcAdapter.cpp
+
 C_SOURCE_FILES += $(EHAL_PATH)/ARM/Nordic/nRF51/src/Vectors_nRF51.c
 C_SOURCE_FILES += $(COMPONENTS)/libraries/timer/app_timer.c
 C_SOURCE_FILES += $(COMPONENTS)/libraries/gpiote/app_gpiote.c
@@ -117,6 +123,11 @@ INC_PATHS += -I./inc
 INC_PATHS += -I./inc_c
 INC_PATHS += -I./config
 
+INC_PATHS += -I ./git_submodules/linux-to-pn532/stubduino
+INC_PATHS += -I ./git_submodules/linux-to-pn532/git_submodules/PN532/PN532
+INC_PATHS += -I ./git_submodules/linux-to-pn532/git_submodules/arduino-serial
+INC_PATHS += -I ./git_submodules/linux-to-pn532/git_submodules/PN532/NDEF
+INC_PATHS += -I ./git_submodules/linux-to-pn532/git_submodules/PN532/PN532_I2C
 #arm GCC
 
 #nordic nrf51

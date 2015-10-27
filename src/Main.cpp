@@ -37,6 +37,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <TestBattery.h>
 #include <Config.h>
 
+#include "PN532_I2C.h"
+#include "NfcAdapter.h"
+
 
 extern "C"{
 #include <stdlib.h>
@@ -319,6 +322,10 @@ static void timerEventDispatch(u16 passedTime, u32 appTimer){
 
 //Starts an application timer
 void initTimers(void){
+    TwoWire tw;
+    PN532_I2C i2c(tw);
+    NfcAdapter adapter(i2c);
+
 	u32 err = 0;
 
 	APP_TIMER_INIT(APP_TIMER_PRESCALER, APP_TIMER_MAX_TIMERS, APP_TIMER_OP_QUEUE_SIZE, false);

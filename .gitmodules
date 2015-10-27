@@ -1,0 +1,3 @@
+[submodule "git_submodules/linux-to-pn532"]
+	path = git_submodules/linux-to-pn532
+	url = https://github.com/moredip/linux-to-pn532.git
