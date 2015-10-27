@@ -101,8 +101,8 @@ CPP_SOURCE_FILES += ./src/utility/Utility.cpp
 CPP_SOURCE_FILES += ./src/Wire.cpp
 
 CPP_SOURCE_FILES += ./git_submodules/linux-to-pn532/git_submodules/PN532/PN532_I2C/PN532_I2C.cpp
-CPP_SOURCE_FILES += ./git_submodules/linux-to-pn532/git_submodules/PN532/PN532/PN532.cpp
-CPP_SOURCE_FILES += ./git_submodules/linux-to-pn532/git_submodules/PN532/NDEF/NfcAdapter.cpp
+#CPP_SOURCE_FILES += ./git_submodules/linux-to-pn532/git_submodules/PN532/PN532/PN532.cpp
+#CPP_SOURCE_FILES += ./git_submodules/linux-to-pn532/git_submodules/PN532/NDEF/NfcAdapter.cpp
 
 C_SOURCE_FILES += $(EHAL_PATH)/ARM/Nordic/nRF51/src/Vectors_nRF51.c
 C_SOURCE_FILES += $(COMPONENTS)/libraries/timer/app_timer.c
@@ -113,6 +113,7 @@ C_SOURCE_FILES += $(COMPONENTS)/libraries/button/app_button.c
 C_SOURCE_FILES += $(COMPONENTS)/ble/ble_radio_notification/ble_radio_notification.c
 C_SOURCE_FILES += ./src/nrf/simple_uart.c
 C_SOURCE_FILES += $(COMPONENTS)/drivers_nrf/hal/nrf_delay.c
+C_SOURCE_FILES += $(COMPONENTS)/drivers_nrf/twi_master/nrf_drv_twi.c
 C_SOURCE_FILES += $(COMPONENTS)/drivers_nrf/pstorage/pstorage.c
 C_SOURCE_FILES += $(COMPONENTS)/softdevice/common/softdevice_handler/softdevice_handler.c
 
@@ -149,6 +150,7 @@ INC_PATHS += -I$(COMPONENTS)/drivers_nrf/hal
 INC_PATHS += -I$(COMPONENTS)/drivers_nrf/config
 INC_PATHS += -I$(COMPONENTS)/drivers_nrf/common
 INC_PATHS += -I$(COMPONENTS)/drivers_nrf/gpiote
+INC_PATHS += -I$(COMPONENTS)/drivers_nrf/twi_master
 
 OBJECT_DIRECTORY = _build
 LISTING_DIRECTORY = $(OBJECT_DIRECTORY)

@@ -322,9 +322,9 @@ static void timerEventDispatch(u16 passedTime, u32 appTimer){
 
 //Starts an application timer
 void initTimers(void){
-    TwoWire tw;
+    TwoWire tw(19,20);
     PN532_I2C i2c(tw);
-    NfcAdapter adapter(i2c);
+    //NfcAdapter adapter(i2c);
 
 	u32 err = 0;
 
