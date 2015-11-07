@@ -264,6 +264,7 @@ extern "C"
 	{
 		for (;;)
 		{
+			NVIC_SystemReset();
 			// Endless debugger loop
 		}
 	}

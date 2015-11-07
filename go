@@ -129,9 +129,9 @@ function create-persistors {
 
 function deploy-nodes-to-all-local-devices {
     toggle-gateway-config false
-    toggle-terminal-config false
-    toggle-logging-config false
-    toggle-nfc-config true
+    toggle-terminal-config true
+    toggle-logging-config true
+    toggle-nfc-config false
     compile
     $HOME/nrf/projects/fruitymesh/deploy/deploy-from-1-on.sh
 }

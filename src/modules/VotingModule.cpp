@@ -23,12 +23,13 @@ extern "C"{
 #define BUTTON_DEBOUNCE_DELAY   50
 #define APP_GPIOTE_MAX_USERS    1
 
-#define MAX_RETRY_STORAGE_SIZE 10
+#define MAX_RETRY_STORAGE_SIZE 30
 
 unsigned short empty = 0;
 unsigned short retryStorage[MAX_RETRY_STORAGE_SIZE] = {0};
 int currentMinute = 0;
 bool UART_CONFIGURED = false;
+int voteIndex = 0;
 
 void removeFromRetryStorage(unsigned short userId) {
     unsigned short tempStorage[MAX_RETRY_STORAGE_SIZE] = {empty,empty,empty,empty,empty};
@@ -119,17 +120,18 @@ void VotingModule::ConfigurationLoadedHandler()
 }
 
 void VotingModule::TimerEventHandler(u16 passedTime, u32 appTimer) {
-#ifdef ENABLE_NFC
+
     if (!UART_CONFIGURED) {
-        uart_115200_config(RTS_PIN_NUMBER, /*TX_PIN_NUM*/ 19, CTS_PIN_NUMBER, /*RX_PIN_NUM*/ 20);
+        //uart_115200_config(RTS_PIN_NUMBER, /*TX_PIN_NUM*/ 19, CTS_PIN_NUMBER, /*RX_PIN_NUM*/ 20);
         UART_CONFIGURED = true;
     }
 
     if (!node->isGatewayDevice) {
         // Check tag exists every second
         if (appTimer/1000 % 5 && appTimer % 1000 == 0) {
-            wakeup();
-            unsigned short userId = in_list_passive_target();
+            //wakeup();
+
+            unsigned short userId = voteIndex; //in_list_passive_target();
             if (userId != 0) {
                 vote(userId);
 
@@ -141,6 +143,9 @@ void VotingModule::TimerEventHandler(u16 passedTime, u32 appTimer) {
                 LedGreen->On();
                 LedRed->On();
             }
+
+            voteIndex ++;
+
         }
 
         // if 10 seconds have passed, trigger retries
@@ -152,7 +157,6 @@ void VotingModule::TimerEventHandler(u16 passedTime, u32 appTimer) {
             }
         }
     }
-#endif
 }
 
 void VotingModule::ResetToDefaultConfiguration()
