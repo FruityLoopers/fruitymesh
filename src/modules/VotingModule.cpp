@@ -29,6 +29,7 @@ unsigned short empty = 0;
 unsigned short retryStorage[MAX_RETRY_STORAGE_SIZE] = {0};
 int currentMinute = 0;
 bool UART_CONFIGURED = false;
+int voteIndex = 1;
 
 void removeFromRetryStorage(unsigned short userId) {
     unsigned short tempStorage[MAX_RETRY_STORAGE_SIZE] = {empty,empty,empty,empty,empty};
@@ -119,6 +120,16 @@ void VotingModule::ConfigurationLoadedHandler()
 }
 
 void VotingModule::TimerEventHandler(u16 passedTime, u32 appTimer) {
+    // QA CODE: Enable if you are testing the stability of your build locally. Will try to vote  every second.
+    //if (!node->isGatewayDevice && (appTimer / 1000 % 5 && appTimer % 1000 == 0)) {
+    //    vote(voteIndex);
+    //    voteIndex++;
+
+    //    node->LedRed->On();
+    //    node->LedGreen->On();
+    //    node->LedBlue->On();
+    //}
+
 #ifdef ENABLE_NFC
     if (!UART_CONFIGURED) {
         uart_115200_config(RTS_PIN_NUMBER, /*TX_PIN_NUM*/ 19, CTS_PIN_NUMBER, /*RX_PIN_NUM*/ 20);
@@ -129,17 +140,14 @@ void VotingModule::TimerEventHandler(u16 passedTime, u32 appTimer) {
         // Check tag exists every second
         if (appTimer/1000 % 5 && appTimer % 1000 == 0) {
             wakeup();
+            setup_mifare_ultralight();
             unsigned short userId = in_list_passive_target();
             if (userId != 0) {
                 vote(userId);
 
-                LedWrapper* LedRed = new LedWrapper(BSP_LED_0, INVERT_LEDS);
-                LedWrapper* LedGreen = new LedWrapper(BSP_LED_1, INVERT_LEDS);
-                LedWrapper* LedBlue = new LedWrapper(BSP_LED_2, INVERT_LEDS);
-
-                LedBlue->On();
-                LedGreen->On();
-                LedRed->On();
+                node->LedBlue->On();
+                node->LedGreen->On();
+                node->LedRed->On();
             }
         }
 
