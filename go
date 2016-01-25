@@ -2,6 +2,9 @@
 
 set -e
 
+JLINK=$HOME/nrf/tools/jlink
+FRUITY_REPO=$HOME/nrf/projects/fruitymesh
+
 function helptext {
     echo "Usage: ./go <command>"
     echo ""
@@ -9,9 +12,10 @@ function helptext {
     echo "    recovery          Flash the device in recovery mode to retrieve votes"
     echo "    cn                Compile node code"
     echo "    d1                Deploy currently compiled code to a device I choose"
-    echo "    fleet             Create and deploy a Fleet: All connected devices become Nodes except for 1 Gateway at oldest attached device"
-    echo "    nodes             Create Nodes out of all connected devices"
-    echo "    pers              Creates Persistors out of all connected devices"
+    echo "    fleet             (Assumes more than one device connected) Create and deploy a Fleet: All connected devices become Nodes except for 1 Gateway at oldest attached device"
+    echo "    nodes             (Assumes more than one device connected) Create Nodes out of all connected devices"
+    echo "    pers              (Assumes more than one device connected) Creates Persistors out of all connected devices"
+    echo "    reset             Factory Reset"
     echo "    gate              Create and deploy a Gateway to oldest attached device"
     echo "    term <tty.file>   Open terminal to specified file (Requires minicom to be installed)"
     echo "    compile           Clean and compile FruityMesh source"
@@ -116,7 +120,14 @@ function create-gateway {
     toggle-nfc-config false
     compile
     # Oldest connected J-Link device will become a gateway
-    echo 0 | $HOME/nrf/tools/jlink $HOME/nrf/projects/fruitymesh/deploy/single-fruitymesh-softdevice-deploy.jlink
+    echo 0 | $JLINK $FRUITY_REPO/deploy/single-fruitymesh-softdevice-deploy.jlink
+}
+
+function deploy-to-many {
+    NUMBER_OF_DEVICES=`expr $(echo -e "ShowEmuList\nexit\n" | $JLINK | grep 'J-Link\[' | wc -l) - 1`
+    for i in $(seq 0 $NUMBER_OF_DEVICES); do
+        echo $i | $JLINK $FRUITY_REPO/deploy/single-fruitymesh-softdevice-deploy.jlink
+    done
 }
 
 function create-persistors {
@@ -125,9 +136,7 @@ function create-persistors {
     toggle-terminal-config true
     toggle-nfc-config false
     compile
-    # Oldest connected J-Link device will become a persistor
-    $HOME/nrf/projects/fruitymesh/deploy/deploy-from-1-on.sh
-    #echo 0 | $HOME/nrf/tools/jlink $HOME/nrf/projects/fruitymesh/deploy/single-fruitymesh-softdevice-deploy.jlink
+    deploy-to-many
 }
 
 function compile-node {
@@ -144,7 +153,7 @@ function deploy-nodes-to-all-local-devices {
     toggle-logging-config false
     toggle-nfc-config true
     compile
-    $HOME/nrf/projects/fruitymesh/deploy/deploy-from-1-on.sh
+    deploy-to-many
 }
 
 function recovery-mode {
@@ -153,7 +162,7 @@ function recovery-mode {
     toggle-logging-config true
     toggle-nfc-config false
     compile
-    $HOME/nrf/projects/fruitymesh/deploy/deploy-from-1-on.sh
+    $JLINK deploy/single-fruitymesh-softdevice-deploy.jlink
 }
 
 function fleet {
@@ -190,7 +199,11 @@ function minprog {
 }
 
 function deploy-to-device-i-choose {
-    $HOME/nrf/tools/jlink deploy/single-fruitymesh-softdevice-deploy.jlink
+    $JLINK deploy/single-fruitymesh-softdevice-deploy.jlink
+}
+
+function reset {
+    $JLINK deploy/factory_reset_device.jlink
 }
 
 case "$1" in
@@ -211,6 +224,8 @@ case "$1" in
     term) term "$2"
     ;;
     compile) compile
+    ;;
+    reset) reset
     ;;
     debug) debug
     ;;
