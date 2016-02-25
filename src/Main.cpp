@@ -74,7 +74,6 @@ bool lookingForInvalidStateErrors = false;
 
 Conf* Conf::instance;
 
-
 int main(void)
 {
 

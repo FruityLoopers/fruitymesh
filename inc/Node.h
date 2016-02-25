@@ -33,6 +33,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <adv_packets.h>
 #include <conn_packets.h>
 #include <LedWrapper.h>
+#include <BuzzerWrapper.h>
 #include <ConnectionManager.h>
 #include <Connection.h>
 #include <SimpleBuffer.h>
@@ -116,9 +117,9 @@ class Node:
 		LedWrapper* LedRed;
 		LedWrapper* LedGreen;
 		LedWrapper* LedBlue;
-		LedWrapper* Buzzer;
+		BuzzerWrapper* Buzzer;
 
-		void FlashWhite(int numberOfTimesToFlash);
+		void FlashWhiteAndBuzz(int numberOfTimesToFlash);
 
 		SimpleBuffer* joinMePacketBuffer;
 

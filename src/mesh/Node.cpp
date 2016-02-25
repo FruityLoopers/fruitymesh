@@ -81,7 +81,7 @@ Node::Node(networkID networkId)
 	LedRed = new LedWrapper(BSP_LED_0, INVERT_LEDS);
 	LedGreen = new LedWrapper(BSP_LED_1, INVERT_LEDS);
 	LedBlue = new LedWrapper(BSP_LED_2, INVERT_LEDS);
-	Buzzer = new LedWrapper(18, true);
+	Buzzer = new BuzzerWrapper(6);
 
 	LedRed->Off();
 	LedGreen->Off();
@@ -189,21 +189,23 @@ void Node::ConfigurationLoadedHandler()
  #########################################################################################################
  */
 
-void Node::FlashWhite(int numberOfTimesToFlash) {
+void Node::FlashWhiteAndBuzz(int numberOfTimesToFlash) {
+
+	this->Buzzer->On();
 
 	for (int n = 0; n < numberOfTimesToFlash; n++) {
 		this->LedRed->On();
 		this->LedBlue->On();
 		this->LedGreen->On();
-		this->Buzzer->On();
 		nrf_delay_us(100000);
 
 		this->LedRed->Off();
 		this->LedBlue->Off();
 		this->LedGreen->Off();
-		this->Buzzer->Off();
 		nrf_delay_us(100000);
 	}
+
+	this->Buzzer->Off();
 }
 
 /*
