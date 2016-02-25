@@ -162,8 +162,7 @@ class Conf
 
 //Select the board for which to compile
 #ifdef NRF51
-	#include <board_pca10031.h>
-//#include <board_ars100748.h>
+	#include <board_voting.h>
 #endif
 #ifdef NRF52
 	#include <board_pca10036.h>

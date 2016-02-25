@@ -15,12 +15,12 @@
 // LEDs definitions for PCA10028
 #define LEDS_NUMBER    4
 
-#define LED_START      21
-#define LED_1          21
-#define LED_2          22
-#define LED_3          23
-#define LED_4          24
-#define LED_STOP       24
+#define LED_START      3
+#define LED_1          3
+#define LED_2          4
+#define LED_3          5
+#define LED_4          6
+#define LED_STOP       5
 
 #define LEDS_LIST { LED_1, LED_2, LED_3, LED_4 }
 
