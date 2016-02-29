@@ -289,8 +289,8 @@ typedef enum {
 
 data_grab_state_t grab_state = start_grabbing;
 
-int max_remaining_byte_size_in_a_frame = 15;
-const int four_frame_data_dump_size = 60;
+int max_remaining_byte_size_in_a_frame = 16;
+const int four_frame_data_dump_size = 64;
 static uint8_t data_dump1[four_frame_data_dump_size] = {0};
 int count = 0;
 int dump_index = 0;

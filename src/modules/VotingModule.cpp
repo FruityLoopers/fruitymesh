@@ -179,8 +179,7 @@ void VotingModule::ConnectionPacketReceivedEventHandler(connectionPacket* inPack
                                     + (packet->data[4] << 8 )
                                     + (packet->data[5] ));
 
-                    logt("VOTING", "Gateway %d received voter message from %d with userId %d\n", node->persistentConfig.nodeId, packetHeader->sender, uID);
-                    //logt("VOTING", "Gateway %d received voter message from %d with userId %d and time %d\n", node->persistentConfig.nodeId, packetHeader->sender, uID, timeSent);
+                    logt("VOTING", "Gateway %d received voter message from %d with userId %d and time %d\n", node->persistentConfig.nodeId, packetHeader->sender, uID, timeSent);
 
                     //Send Response acknowledgement
                     connPacketModule outPacket;
