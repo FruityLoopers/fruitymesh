@@ -40,7 +40,6 @@ BuzzerWrapper::BuzzerWrapper(uint32_t io_num)
 {
   active = true;
   pin_num = io_num;
-
   lastStateChangeMs = 0;
 }
 
@@ -48,9 +47,8 @@ void BuzzerWrapper::On(void)
 {
   if(!active) return;
 
-  app_pwm_config_t pwm_config = APP_PWM_DEFAULT_CONFIG_1CH(500L, pin_num);
-  uint32_t err = app_pwm_init(&PWM1, &pwm_config, pwm_ready_callback);
-  APP_ERROR_CHECK(err);
+  app_pwm_config_t pwm_config = APP_PWM_DEFAULT_CONFIG_1CH(2000L, pin_num);
+  APP_ERROR_CHECK(app_pwm_init(&PWM1, &pwm_config, pwm_ready_callback));
   app_pwm_enable(&PWM1);
   app_pwm_channel_duty_set(&PWM1, 0, 10);
 }
