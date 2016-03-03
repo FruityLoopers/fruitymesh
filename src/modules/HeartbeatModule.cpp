@@ -58,7 +58,11 @@ void HeartbeatModule::ConnectionPacketReceivedEventHandler(connectionPacket* inP
 
     connPacketHeartbeat* packet = (connPacketHeartbeat*)packetHeader;
 
-    logt("HEARTBEAT", "HEARTBEAT RECEIVED from nodeId:%d inConn:%d outConns:[%d,%d,%d]\n",
+		char timestring[50];
+		Logger::getInstance().convertTimestampToString(node->globalTime, timestring);
+
+    logt("HEARTBEAT", "[%s] HEARTBEAT RECEIVED from nodeId:%d inConn:%d outConns:[%d,%d,%d]\n",
+         timestring,
          packetHeader->sender,
          packet->inConn.partnerId,
          packet->outConn[0].partnerId,
