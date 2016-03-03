@@ -9,8 +9,8 @@
  * the file.
  *
  */
-#ifndef PCA10031_H
-#define PCA10031_H
+#ifndef VOTINGBOX_H
+#define VOTINGBOX_H
 
 // LEDs definitions for PCA10031 (nrf51 Dongle)
 #define LEDS_NUMBER    3
@@ -52,5 +52,10 @@
 #define CTS_PIN_NUMBER 10
 #define RTS_PIN_NUMBER 8
 #define HWFC           true
+
+
+#define RX_PIN_NUMBER_NFC  11
+#define TX_PIN_NUMBER_NFC  10
+#define BUZZER_PIN_NUMBER  6
 
 #endif

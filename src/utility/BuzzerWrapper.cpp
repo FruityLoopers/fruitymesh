@@ -62,6 +62,7 @@ void BuzzerWrapper::Off(void)
   app_pwm_channel_duty_set(&PWM1, 0, 0);
   app_pwm_disable(&PWM1);
   app_pwm_uninit(&PWM1);
+  nrf_gpio_pin_clear(pin_num);
 }
 
 /* EOF */

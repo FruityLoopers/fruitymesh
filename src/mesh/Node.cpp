@@ -81,7 +81,7 @@ Node::Node(networkID networkId)
 	LedRed = new LedWrapper(BSP_LED_0, INVERT_LEDS);
 	LedGreen = new LedWrapper(BSP_LED_1, INVERT_LEDS);
 	LedBlue = new LedWrapper(BSP_LED_2, INVERT_LEDS);
-	Buzzer = new BuzzerWrapper(6);
+	Buzzer = new BuzzerWrapper(BUZZER_PIN_NUMBER);
 
 	LedRed->Off();
 	LedGreen->Off();
@@ -816,9 +816,6 @@ bool Node::PutInRetryStorage(unsigned short userId) {
 	unsigned short temp[MAX_RETRY_STORAGE_SIZE] = {0};
 
 	if(this->RetryStorageContains(userId)) {
-		//this->LedRed->On();
-		//this->LedGreen->On();
-		//this->LedBlue->On();
 		return true;
 	}
 
@@ -836,10 +833,6 @@ bool Node::PutInRetryStorage(unsigned short userId) {
 			break;
 		}
 	}
-
-	//this->LedRed->On();
-	//this->LedGreen->On();
-	//this->LedBlue->On();
 
 	this->SaveConfiguration();
 

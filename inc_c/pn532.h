@@ -47,8 +47,8 @@ void wakeup();
 void powerdown();
 void setup_mifare_ultralight();
 unsigned short in_list_passive_target();
-void uart_115200_config(uint8_t rts_pin_number, uint8_t txd_pin_number,
-						uint8_t cts_pin_number, uint8_t rxd_pin_number, uart_event_handler event_handler);
+void uart_115200_config(uint8_t txd_pin_number, uint8_t rxd_pin_number, uint8_t buzzer_pin_number,
+            uart_event_handler event_handler);
 void uart_put_char(uint8_t character);
 void gobble_number_of_bytes(int number);
 void send_preamble_and_start();

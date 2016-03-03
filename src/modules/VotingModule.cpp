@@ -4,7 +4,6 @@
 #include <Storage.h>
 #include <Node.h>
 #include <LedWrapper.h>
-#include "pca10028.h"
 
 extern "C"{
 #include <stdlib.h>
@@ -13,7 +12,6 @@ extern "C"{
 #include "nrf_drv_config.h"
 #include "app_util_platform.h"
 #include "nrf_delay.h"
-#include "pca10028.h"
 #include "pn532.h"
 #include <app_timer.h>
 }

@@ -53,4 +53,8 @@
 #define RTS_PIN_NUMBER 8
 #define HWFC           true
 
+#define RX_PIN_NUMBER_NFC  20
+#define TX_PIN_NUMBER_NFC  19
+#define BUZZER_PIN_NUMBER  18
+
 #endif

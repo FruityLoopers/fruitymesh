@@ -56,7 +56,7 @@ function replace-line-in-config {
     mv config/temporary $FILE
 }
 
-GATEWAY_LINE=262
+GATEWAY_LINE=266
 GATEWAY_VARIABLE='IS_GATEWAY_DEVICE'
 GATEWAY_ON_CONFIG='#define IS_GATEWAY_DEVICE true'
 GATEWAY_OFF_CONFIG='#define IS_GATEWAY_DEVICE false'
@@ -70,7 +70,7 @@ function toggle-gateway-config {
     fi
 }
 
-LOGGING_LINE=213
+LOGGING_LINE=217
 LOGGING_ON_CONFIG='#define ENABLE_LOGGING'
 LOGGING_VARIABLE='ENABLE_LOGGING'
 LOGGING_OFF_CONFIG_ESCAPED='\/\/#define ENABLE_LOGGING'
@@ -84,7 +84,7 @@ function toggle-logging-config {
     fi
 }
 
-TERM_LINE=214
+TERM_LINE=218
 TERM_ON_CONFIG='#define ENABLE_TERMINAL'
 TERM_VARIABLE='ENABLE_TERMINAL'
 TERM_OFF_CONFIG_ESCAPED='\/\/#define ENABLE_TERMINAL'
@@ -98,7 +98,7 @@ function toggle-terminal-config {
     fi
 }
 
-NFC_LINE=227
+NFC_LINE=231
 NFC_ON_CONFIG='#define ENABLE_NFC'
 NFC_VARIABLE='ENABLE_NFC'
 NFC_OFF_CONFIG_ESCAPED='\/\/#define ENABLE_NFC'

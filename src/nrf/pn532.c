@@ -5,7 +5,6 @@
 #include "nrf_delay.h"
 #include "nrf_gpio.h"
 #include "app_util_platform.h"
-#include "pca10028.h"
 
 #define UART_BUF_SIZE 10
 
@@ -359,14 +358,13 @@ void UART0_IRQHandler(void)
     }
 }
 
-void uart_115200_config(uint8_t rts_pin_number,
-                        uint8_t txd_pin_number,
-                        uint8_t cts_pin_number,
+void uart_115200_config(uint8_t txd_pin_number,
                         uint8_t rxd_pin_number,
+                        uint8_t buzzer_pin_number,
                         uart_event_handler event_handler) {
     m_event_handler = event_handler;
 
-    nrf_gpio_cfg_output(6);
+    nrf_gpio_pin_clear(buzzer_pin_number);
     nrf_gpio_cfg_output(txd_pin_number);
     nrf_gpio_cfg_input(rxd_pin_number, NRF_GPIO_PIN_PULLUP);
     // old - nrf_gpio_cfg_input(rxd_pin_number, NRF_GPIO_PIN_NOPULL);

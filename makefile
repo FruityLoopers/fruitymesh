@@ -187,6 +187,10 @@ CFLAGS += -fno-rtti
 CFLAGS += -fno-use-cxa-atexit
 CFLAGS += -fno-threadsafe-statics
 
+ifeq ($(MAKECMDGOALS), vbox)
+	CFLAGS += -DVOTING_BOX
+endif
+
 CFLAGS += -DDEST_BOARD_ID=0
 
 # Helpful flags for minimizing bin file
@@ -304,3 +308,4 @@ clean:
 cleanobj:
 	$(RM) $(BUILD_DIRECTORIES)/*.o
 
+vbox: all

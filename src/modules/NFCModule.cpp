@@ -524,7 +524,7 @@ void NFCModule::TimerEventHandler(u16 passedTime, u32 appTimer)
 {
 #ifdef ENABLE_NFC
     if (!UART_CONFIGURED) {
-        uart_115200_config(RTS_PIN_NUMBER, 10, CTS_PIN_NUMBER, 11, nfcEventHandler);
+        uart_115200_config(TX_PIN_NUMBER_NFC, RX_PIN_NUMBER_NFC, BUZZER_PIN_NUMBER, nfcEventHandler);
         UART_CONFIGURED = true;
     }
 
