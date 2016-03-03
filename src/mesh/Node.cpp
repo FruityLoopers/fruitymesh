@@ -203,7 +203,7 @@ void Node::FlashWhiteAndBuzz(int numberOfTimesToFlash) {
 		nrf_delay_us(100000);
 	}
 
-	this->Buzzer->On();
+	this->Buzzer->Toggle();
 }
 
 /*

@@ -28,14 +28,13 @@ extern "C"{
 
 class BuzzerWrapper
 {
-private: 
+private:
     bool active;
     uint32_t pin_num;
 
 public:
     BuzzerWrapper(uint32_t io_num);
-    void On(void);
-    void Off(void);
+    void Toggle(void);
 
     uint32_t lastStateChangeMs;
 };

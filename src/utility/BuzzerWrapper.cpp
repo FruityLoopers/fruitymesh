@@ -35,11 +35,6 @@ APP_PWM_INSTANCE(PWM1, 1);
 
 void pwm_ready_callback(uint32_t pwm_id)
 {
-  nrf_delay_us(10000);
-  app_pwm_channel_duty_set(&PWM1, 0, 0);
-  app_pwm_disable(&PWM1);
-  app_pwm_uninit(&PWM1);
-  nrf_gpio_pin_clear(6);
 }
 
 BuzzerWrapper::BuzzerWrapper(uint32_t io_num)
@@ -49,24 +44,21 @@ BuzzerWrapper::BuzzerWrapper(uint32_t io_num)
   lastStateChangeMs = 0;
 }
 
-void BuzzerWrapper::On(void)
+void BuzzerWrapper::Toggle(void)
 {
   if(!active) return;
 
-  app_pwm_config_t pwm_config = APP_PWM_DEFAULT_CONFIG_1CH(2000L, pin_num);
+  app_pwm_config_t pwm_config = APP_PWM_DEFAULT_CONFIG_1CH(150, pin_num);
   APP_ERROR_CHECK(app_pwm_init(&PWM1, &pwm_config, pwm_ready_callback));
   app_pwm_enable(&PWM1);
-  app_pwm_channel_duty_set(&PWM1, 0, 10);
-}
+  app_pwm_channel_duty_set(&PWM1, 0, 5);
 
-void BuzzerWrapper::Off(void)
-{
-  if(!active) return;
+  nrf_delay_us(250000);
 
   app_pwm_channel_duty_set(&PWM1, 0, 0);
   app_pwm_disable(&PWM1);
   app_pwm_uninit(&PWM1);
-  nrf_gpio_pin_clear(pin_num);
+  nrf_gpio_pin_clear(6);
 }
 
 /* EOF */
