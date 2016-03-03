@@ -26,6 +26,7 @@ extern "C"{
 #include <nrf.h>
 #include <nrf_gpio.h>
 #include <nrf_drv_config.h>
+#include <nrf_delay.h>
 #include <app_pwm.h>
 #include <app_error.h>
 }
@@ -34,6 +35,11 @@ APP_PWM_INSTANCE(PWM1, 1);
 
 void pwm_ready_callback(uint32_t pwm_id)
 {
+  nrf_delay_us(10000);
+  app_pwm_channel_duty_set(&PWM1, 0, 0);
+  app_pwm_disable(&PWM1);
+  app_pwm_uninit(&PWM1);
+  nrf_gpio_pin_clear(6);
 }
 
 BuzzerWrapper::BuzzerWrapper(uint32_t io_num)

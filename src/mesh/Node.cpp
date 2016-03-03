@@ -191,8 +191,6 @@ void Node::ConfigurationLoadedHandler()
 
 void Node::FlashWhiteAndBuzz(int numberOfTimesToFlash) {
 
-	this->Buzzer->On();
-
 	for (int n = 0; n < numberOfTimesToFlash; n++) {
 		this->LedRed->On();
 		this->LedBlue->On();
@@ -205,7 +203,7 @@ void Node::FlashWhiteAndBuzz(int numberOfTimesToFlash) {
 		nrf_delay_us(100000);
 	}
 
-	this->Buzzer->Off();
+	this->Buzzer->On();
 }
 
 /*
