@@ -54,6 +54,7 @@ void HeartbeatModule::ConnectionPacketReceivedEventHandler(connectionPacket* inP
 
     if (!node->isGatewayDevice) return;
     if (packetHeader->messageType != MESSAGE_TYPE_HEARTBEAT) return;
+    if (packetHeader->sender == node->persistentConfig.nodeId) return;
 
     connPacketHeartbeat* packet = (connPacketHeartbeat*)packetHeader;
 
