@@ -34,7 +34,8 @@ private:
 
 public:
     BuzzerWrapper(uint32_t io_num);
-    void Toggle(void);
+    void On(void);
+    void Off(void);
 
     uint32_t lastStateChangeMs;
 };
