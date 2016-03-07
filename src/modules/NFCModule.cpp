@@ -539,7 +539,7 @@ void NFCModule::TimerEventHandler(u16 passedTime, u32 appTimer)
         }
     }
 
-    if (get_setup_state() == SETUP_DONE && (appTimer/1000 % 5 && appTimer % 1000 == 0)) {
+    if (get_setup_state() == SETUP_DONE && (appTimer % 500 == 0)) {
         setup_state_machine();
         in_list_passive_target();
     }
