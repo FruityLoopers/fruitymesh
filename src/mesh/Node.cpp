@@ -1104,7 +1104,7 @@ void Node::TimerTickHandler(u16 timerMs)
 
 			if(ledBlinkPosition % 2 == 0) {
 
-				if (handshakeDone) { LedBlue->On(); }
+				//if (handshakeDone) { LedBlue->On(); }
 
 				if (handshakeInProgress) { LedGreen->On(); }
 
